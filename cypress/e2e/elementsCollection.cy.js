@@ -89,7 +89,7 @@ describe('DemoQA - Elements', () => {
         commonsPage.accessUrl(data.endpoints.uploadDownloadUrl);
         elementsPage.downloadFile();
         elementsPage.validateDownload();
-        elementsPage.uploadFile();
+        commonsPage.uploadFile();
         elementsPage.validateUpload();
     });
 })

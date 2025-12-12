@@ -48,7 +48,9 @@ class FormsPage {
     }
 
     selectState() {
-        cy.get('#state').click().press(Cypress.Keyboard.Keys.TAB).should('exist', data.formData.states.nCR.name)
+        const stateName = data.formData.states.nCR.name;
+        cy.get('#state input').type(`${stateName}{enter}`, { force: true });
+        cy.get('#state').should('contain', stateName);
     }
 
     selectCity() {
@@ -56,22 +58,26 @@ class FormsPage {
         cy.get('div#city div[class$="placeholder"]').press(Cypress.Keyboard.Keys.TAB)
     }
 
+    checksForCorrectCity() {
+        const invalidCity = data.formData.states.uttarPradesh.cities.agra;
+        const validCity = data.formData.states.nCR.cities.delhi;
+        cy.get('#state').should('contain', data.formData.states.nCR.name);
+        cy.get('#city').scrollIntoView().click().should('not.be.disabled');
+        cy.contains(validCity).should('exist').press(Cypress.Keyboard.Keys.ENTER)
+        cy.contains(invalidCity).should('not.exist');
+    }
+
     validateSuccessMessage() {
         cy.get('.modal-content').should('be.visible');
         cy.get('#example-modal-sizes-title-lg').should('have.text', data.formData.successMessage);
     }
-
+    
     checkForEmptyFieldError() {
         cy.get('.modal-content').should('not.exist');
         cy.get('#userForm').should('have.class', 'was-validated');
         cy.get('#firstName').should('have.css', 'border-color', 'rgb(220, 53, 69)');
     }
-
-    checksForCorrectCity() {
-        const expectedCity = data.formData.states.uttarPradesh.cities.agra
-        cy.get('#city').click({ force: true });
-        cy.contains(expectedCity).should('not.exist');
-    }
 }
+    
 
 export default new FormsPage();
