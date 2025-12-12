@@ -1,0 +1,106 @@
+{
+    "endpoints": {
+        "formsUrl": "/automation-practice-form",
+        "textBoxUrl": "/text-box",
+        "checkBoxUrl": "/checkbox",
+        "radioBtnUrl": "/radio-button"
+    },
+    "userData": {
+        "name": {
+            "firstName": "Artur",
+            "lastName": "Dias"
+        },
+        "email": "ArturTest@hotmail.com",
+        "invalidEmail": "emailsemarroba.com",
+        "mobileNumber": "5555555555",
+        "birthDate": "05/03/2000",
+        "AddressInput": "Travessa Biju, Bairro Coophavila II. Campo Grande MS",
+        "state": "NCR",
+        "city": "Delhi"
+    },
+    "formData": {
+        "gender": {
+            "opt1": "Male",
+            "opt2": "Female",
+            "opt3": "Other"
+        },
+        "hobbies": {
+            "opt1": "Sports",
+            "opt2": "Reading",
+            "opt3": "Music"
+        },
+        "subjects": {
+            "opt1": "m",
+            "opt2": "p",
+            "opt3": "e"
+        },
+        "states": {
+            "nCR": {
+                "delhi": "Delhi",
+                "gurgaon": "Gurgaon",
+                "noida": "Noida"
+            },
+            "uttarPradesh": {
+                "agra": "Agra"
+            },
+            "studentRegistrationForm": "Student Registration Form",
+            "fileName": "testpdf.pdf",
+            "subjectName": "Maths",
+            "successMessage": "Thanks for submitting the form"
+        }
+    },
+    "checkBoxData": {
+        "mainLabel": "Home",
+        "folderStructure": {
+            "Desktop": [
+                "Notes",
+                "Commands"
+            ],
+            "Documents": {
+                "WorkSpace": [
+                    "React",
+                    "Angular",
+                    "Veu"
+                ],
+                "Office": [
+                    "Public",
+                    "Private",
+                    "Classified",
+                    "General"
+                ]
+            },
+            "Downloads": {
+                "wordFile": "Word File.doc",
+                "excelFile": "Excel File.doc"
+            }
+        },
+        "validationList": [
+            "home",
+            "desktop",
+            "notes",
+            "commands",
+            "documents",
+            "workspace",
+            "react",
+            "angular",
+            "veu",
+            "office",
+            "public",
+            "private",
+            "classified",
+            "general",
+            "downloads",
+            "wordFile",
+            "excelFile"
+        ]   
+    },
+    "radioBtnData": {
+        "yes": "Yes",
+        "impressive": "Impressive",
+        "no": "No",
+        "elementExists": {
+            "isVisible": "be.visible",
+            "nonexistent": "not.exist"
+        }
+    }
+}
