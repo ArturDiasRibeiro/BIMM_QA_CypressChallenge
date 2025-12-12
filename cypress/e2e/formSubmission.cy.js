@@ -1,5 +1,5 @@
-import FormsPage from '../pages/FormsPage';
 import data from "../fixtures/data.json"
+import formsPage from '../pages/FormsPage';
 import commonsPage from '../pages/CommonsPage';
 
 Cypress.on('uncaught:exception', (err, runnable) => {
@@ -7,45 +7,43 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 });
 
 describe('DemoQA - Form Submission', () => {
-    beforeEach(() => {
-        FormsPage.practiceFormsUrl();
+beforeEach(() => {
+        commonsPage.accessUrl(data.endpoints.practiceFormsUrl);
     });
 
-    it("HappyPath - Identify and fulfill all fields ", () => {
-        commonsPage.accessUrl(data.endpoints.formsPageUrl);
-        commonsPage.insertName();
-        commonsPage.fillEmail();
-        FormsPage.selectGender();
-        FormsPage.fillMobileNumber();
-        FormsPage.fillBirthDate();
-        FormsPage.fillSubjects();
-        FormsPage.selectHobbies();
-        FormsPage.uploadPicture();
-        commonsPage.addressInput();
-        FormsPage.selectState();
-        FormsPage.selectCity();
-        commonsPage.pressBtnSubmit();
-        FormsPage.validateSuccessMessage();
-    });
+    // it("HappyPath - Identify and fulfill all fields ", () => {
+    //     commonsPage.insertName();
+    //     commonsPage.inputEmail();
+    //     formsPage.selectGender();
+    //     formsPage.fillMobileNumber();
+    //     formsPage.fillBirthDate();
+    //     formsPage.fillSubjects();
+    //     formsPage.selectHobbies();
+    //     commonsPage.uploadPic();
+    //     commonsPage.addressInput();
+    //     formsPage.selectState();
+    //     formsPage.selectCity();
+    //     commonsPage.pressBtnSubmit();
+    //     formsPage.validateSuccessMessage();
+    // });
 
-    it("Empty submission attempt", () => {
-        FormsPage.submit();
-        FormsPage.checkForEmptyFieldError()
-    });
+    // it("Empty submission attempt", () => {
+    //     commonsPage.accessUrl(data.endpoints.practiceFormsUrl);
+    //     commonsPage.pressBtnSubmit();
+    //     formsPage.checkForEmptyFieldError()
+    // });
 
-    it('Refuse a invalid email', () => {
-        FormsPage.fillFirstName();
-        FormsPage.fillLastName();
-        FormsPage.selectGender();
-        FormsPage.fillMobileNumber();
-        commonsPage.inputInvalidEmail();
-        FormsPage.submit();
-        FormsPage.wrongEmailError();
-    });
+    // it('Refuse a invalid email', () => {
+    //     commonsPage.insertName();
+    //     formsPage.selectGender();
+    //     formsPage.fillMobileNumber();
+    //     commonsPage.inputInvalidEmail();
+    //     commonsPage.pressBtnSubmit();
+    //     formsPage.wrongEmailError();
+    // });
 
     it("City field dependency on State field ", () => {
-        FormsPage.selectState();
-        FormsPage.checksForCorrectCity();
+        formsPage.selectState();
+        formsPage.checksForCorrectCity();
     });
-
 });

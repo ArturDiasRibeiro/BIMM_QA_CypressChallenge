@@ -1,20 +1,26 @@
 {
     "endpoints": {
-        "formsUrl": "/automation-practice-form",
+        "practiceFormsUrl": "/automation-practice-form",
         "textBoxUrl": "/text-box",
         "checkBoxUrl": "/checkbox",
-        "radioBtnUrl": "/radio-button"
+        "radioBtnUrl": "/radio-button",
+        "webTables": "/webtables",
+        "btnUrl": "/buttons",
+        "linksUrl": "/links",
+        "brokenLinksUrl": "/broken",
+        "uploadDownloadUrl": "/upload-download"
     },
     "userData": {
         "name": {
             "firstName": "Artur",
             "lastName": "Dias"
         },
+        "age": "24",
         "email": "ArturTest@hotmail.com",
         "invalidEmail": "emailsemarroba.com",
         "mobileNumber": "5555555555",
         "birthDate": "05/03/2000",
-        "AddressInput": "Travessa Biju, Bairro Coophavila II. Campo Grande MS",
+        "AddressInput": "Rua das Araucárias, 204, Arroio do Sal, RS. Brasil",
         "state": "NCR",
         "city": "Delhi"
     },
@@ -24,11 +30,11 @@
             "opt2": "Female",
             "opt3": "Other"
         },
-        "hobbies": {
-            "opt1": "Sports",
-            "opt2": "Reading",
-            "opt3": "Music"
-        },
+        "hobbies": [
+            "Sports",
+            "Reading",
+            "Music"
+        ],
         "subjects": {
             "opt1": "m",
             "opt2": "p",
@@ -36,18 +42,23 @@
         },
         "states": {
             "nCR": {
-                "delhi": "Delhi",
-                "gurgaon": "Gurgaon",
-                "noida": "Noida"
+                "name": "NCR",
+                "cities": {
+                    "delhi": "Delhi",
+                    "gurgaon": "Gurgaon",
+                    "noida": "Noida"
+                }
             },
             "uttarPradesh": {
-                "agra": "Agra"
-            },
-            "studentRegistrationForm": "Student Registration Form",
-            "fileName": "testpdf.pdf",
-            "subjectName": "Maths",
-            "successMessage": "Thanks for submitting the form"
-        }
+                "name": "Uttar Pradesh",
+                "cities": {
+                    "agra": "Agra"
+                }
+            }
+        },
+        "studentRegistrationForm": "Student Registration Form",
+        "picName": "testpng.png",
+        "successMessage": "Thanks for submitting the form"
     },
     "checkBoxData": {
         "mainLabel": "Home",
@@ -92,15 +103,53 @@
             "downloads",
             "wordFile",
             "excelFile"
-        ]   
+        ]
     },
     "radioBtnData": {
-        "yes": "Yes",
-        "impressive": "Impressive",
-        "no": "No",
+        "radioBtnID": {
+            "opt1": "noRadio",
+            "opt2": "impressiveRadio",
+            "opt3": "yesRadio"
+        },
+        "radioBtnLabels": {
+            "yes": "Yes",
+            "impressive": "Impressive",
+            "no": "No"
+        },
         "elementExists": {
             "isVisible": "be.visible",
             "nonexistent": "not.exist"
         }
+    },
+    "webTables": {
+        "salary": "50000",
+        "department": "Engineering",
+        "searchBoxNames": {
+            "Cierra": "Cierra",
+            "Artur": "Artur"
+        },
+        "editValidation": {
+            "firstName": "Artur",
+            "lastName": "Dias",
+            "age": "24",
+            "email": "ArturTest@hotmail.com",
+            "salary": "50000",
+            "departament": "Engineering"
+        },
+        "rowNotFoundMessage": "No rows found"
+    },
+    "buttonsData": {
+        "doubleClickMessage": "You have done a double click",
+        "rightClickMessage": "You have done a right click",
+        "dynamicClickMessage": "You have done a dynamic click"
+    },
+    "linksData": {
+        "validLinkStatus": "200",
+        "brokenLinkStatus": "404"
+    },
+    "uploadDownloadData": {
+        "downloadFileName": "sampleFile.jpeg",
+        "uploadFilePath": "cypress/fixtures/media/testpng.png",
+        "uploadFileName": "testpng.png"
     }
 }

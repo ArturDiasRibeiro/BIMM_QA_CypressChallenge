@@ -1,37 +1,31 @@
 import data from "../fixtures/data.json"
 
 class CommonsPage {
-    
+
     accessUrl(url) {
         cy.visit(url, { failOnStatusCode: false });
     }
-    
+
     insertName() {
         const fullName = data.userData.name.firstName + " " + data.userData.name.lastName;
-        
-        if (cy.get('#userName').should('have.attr', 'placeholder', 'Full Name')) {
-            cy.get('#userName', { timeout: 10000 }).should('be.visible').type(fullName)
-            return fullName;
-        } 
-
-        else if (cy.get('#firstName').should('have.attr', 'placeholder', 'First Name')) {
-        cy.get('#firstName').type(data.userData.name.firstName);
-            return data.userData.name.firstName;
-        } 
-
-        else if (cy.get('#lastName').should('have.attr', 'placeholder', 'Last Name')) {
-            cy.get('#lastName').type(data.userData.name.lastName);
-            return data.userData.name.lastName;
-        }
-    }
-
-    ValidateFullName() {
-        const fullName = data.userData.name.firstName + " " + data.userData.name.lastName;
-        return fullName;
+        cy.get('body').then(($body) => {
+            if ($body.find('#firstName').length > 0) {
+                cy.log('Filling first name field');
+                cy.get('#firstName').clear().should('be.visible').type(data.userData.name.firstName);
+                if ($body.find('#lastName').length > 0) {
+                    cy.log('Filling last name field');
+                    cy.get('#lastName').clear().should('be.visible').type(data.userData.name.lastName);
+                }
+            } else if ($body.find('#userName').length > 0) {
+                cy.get('#userName').clear().type(fullName);
+            } else {
+                throw new Error('Name input field not found');
+            }
+        });
     }
 
     inputEmail() {
-        cy.get('#userEmail').type(data.userData.email);
+        cy.get('#userEmail').clear().type(data.userData.email);
     }
 
     addressInput() {
@@ -45,6 +39,13 @@ class CommonsPage {
     inputInvalidEmail() {
         cy.get('#userEmail').type(data.userData.invalidEmail);
     }
-}
 
+    uploadFile() {
+        cy.get('#uploadFile').selectFile(data.uploadDownloadData.uploadFilePath);
+    }
+
+    uploadPic() {
+        cy.get('#uploadPicture').selectFile(data.uploadDownloadData.uploadFilePath);
+    }
+}
 export default new CommonsPage();

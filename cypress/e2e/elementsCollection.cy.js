@@ -9,7 +9,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 describe('DemoQA - Elements', () => {
 
     it("HappyPath - Textbox", () => {
-        commonsPage.accessUrl(textBoxPageUrl);
+        commonsPage.accessUrl(data.endpoints.textBoxUrl);
         commonsPage.insertName();
         commonsPage.inputEmail();
         commonsPage.addressInput();
@@ -36,5 +36,60 @@ describe('DemoQA - Elements', () => {
         elementsPage.clickCollapseAll();
         elementsPage.validFile(data.radioBtnData.elementExists.nonexistent);
     });
-});
 
+    it("HappyPath - RadioBtn", () => {
+        commonsPage.accessUrl(data.endpoints.radioBtnUrl);
+        elementsPage.validateCheckedOption(data.radioBtnData.radioBtnID);
+    });
+
+    it("HappyPath - RegistrationForm", () => {
+        commonsPage.accessUrl(data.endpoints.webTables);
+        elementsPage.checkOpenRegForm();
+        commonsPage.insertName();
+        commonsPage.inputEmail();
+        elementsPage.ageFieldInput();
+        elementsPage.salaryFieldInput();
+        elementsPage.departamentFieldInput();
+        
+    });
+
+    it("Name Search/Editing - RegistrationForm", () => {
+        commonsPage.accessUrl(data.endpoints.webTables);
+        elementsPage.searchBoxField(data.webTables.searchBoxNames.Cierra);
+        elementsPage.checkOpenRegForm();
+        elementsPage.registrationFormEditing();
+        commonsPage.pressBtnSubmit();
+        elementsPage.searchBoxField(data.webTables.searchBoxNames.Artur);
+        elementsPage.validateRecord(data.webTables.editValidation);
+    })
+
+    it("Deleting Record - RegistrationForm", () => {
+        commonsPage.accessUrl(data.endpoints.webTables);
+        elementsPage.searchBoxField(data.webTables.searchBoxNames.Cierra);
+        elementsPage.deleteRecord(data.webTables.rowNotFoundMessage);
+    });
+
+    it("HappyPath - Buttons", () => {
+        commonsPage.accessUrl(data.endpoints.btnUrl);
+        elementsPage.buttonValidations();
+    });
+
+    it('HappyPath - Links', () => {
+        commonsPage.accessUrl(data.endpoints.linksUrl);
+        elementsPage.linksValidation();
+    });
+
+    it('Broken Links - Validate Server Error (500)', () => {
+        commonsPage.accessUrl(data.endpoints.brokenLinksUrl);
+        elementsPage.validateBrokenLink();
+        elementsPage.validateValidLink();
+    });
+
+    it("HappyPath - Upload and Download", () => {
+        commonsPage.accessUrl(data.endpoints.uploadDownloadUrl);
+        elementsPage.downloadFile();
+        elementsPage.validateDownload();
+        elementsPage.uploadFile();
+        elementsPage.validateUpload();
+    });
+})

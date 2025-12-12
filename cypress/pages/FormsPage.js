@@ -1,13 +1,10 @@
 import data from "../fixtures/data.json"
 
+
 class FormsPage {
 
-    practiceFormsUrl() {
-        cy.visit(data.formsPageUrl, { failOnStatusCode: false });
-    }
-
     checksFormsPageIsLoaded() {
-        cy.contains(data.userData.studentRegistrationForm);
+        cy.contains(data.studentRegistrationForm.studentRegistrationForm);
     }
 
     wrongEmailError() {
@@ -15,10 +12,9 @@ class FormsPage {
     }
 
     selectGender() {
-        const options = Object.values(data.userData.gender);
-        for (const option of options) {
-            cy.contains(option).click({ force: true });
-        }
+        const options = Object.values(data.formData.gender);
+        const randomGender = Cypress._.sample(options);
+        cy.contains(randomGender).click({ force: true });
     }
 
     fillMobileNumber() {
@@ -30,20 +26,21 @@ class FormsPage {
     }
 
     fillSubjects() {
-        const options = Object.values(data.userData.subjects);
+        const options = Object.values(data.formData.subjects);
         for (const option of options) {
             cy.get("#subjectsContainer").type(option).press(Cypress.Keyboard.Keys.TAB)
         }
     }
 
     selectHobbies() {
-        Object.values(data.userData.hobbies).forEach(hobby => {
+        Object.values(data.formData.hobbies).forEach(hobby => {
             cy.contains('label', hobby).click({ force: true });
         })
     }
 
     uploadPicture() {
-        cy.get('#uploadPicture').selectFile('cypress/fixtures/media/' + data.userData.fileName);
+        const file = data.formData.picName
+        cy.get('#uploadPicture').selectFile("cypress/fixtures/media/" + `${file}`, { force: true });
     }
 
     addressInput() {
@@ -51,8 +48,7 @@ class FormsPage {
     }
 
     selectState() {
-        cy.get('#state').click();
-        cy.contains(data.userData.state).press(Cypress.Keyboard.Keys.TAB);
+        cy.get('#state').click().press(Cypress.Keyboard.Keys.TAB).should('exist', data.formData.states.nCR.name)
     }
 
     selectCity() {
@@ -62,7 +58,7 @@ class FormsPage {
 
     validateSuccessMessage() {
         cy.get('.modal-content').should('be.visible');
-        cy.get('#example-modal-sizes-title-lg').should('contain', data.userData.successMessage);
+        cy.get('#example-modal-sizes-title-lg').should('have.text', data.formData.successMessage);
     }
 
     checkForEmptyFieldError() {
@@ -72,7 +68,7 @@ class FormsPage {
     }
 
     checksForCorrectCity() {
-        const expectedCity = data.userData.state.suttarPradesh.agra
+        const expectedCity = data.formData.states.uttarPradesh.cities.agra
         cy.get('#city').click({ force: true });
         cy.contains(expectedCity).should('not.exist');
     }

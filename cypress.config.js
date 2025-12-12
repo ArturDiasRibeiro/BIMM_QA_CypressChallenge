@@ -19,5 +19,15 @@ module.exports = defineConfig({
 
       return config;
     },
+    blockHosts: [
+      "*google-analytics.com",
+      "*doubleclick.net",
+      "*ad.plus",
+      "*openx.net",
+      "*criteo.com",
+      "*rubiconproject.com",
+      "*pubcid.org",
+      "*id5-sync.com"
+    ]
   },
 });

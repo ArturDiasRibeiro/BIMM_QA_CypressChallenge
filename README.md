@@ -26,14 +26,24 @@ This repository contains the automated testing solution for the QA Cypress Chall
 ```text
 cypress/
 ├── e2e/
-│   └── formSubmission.cy.js    # Main test execution file
+│   ├── elementsCollection.cy.js      # [NOVO] Testes da seção Elements (TextBox, CheckBox, RadioBtn)
+│   └── formSubmission.cy.js          # Testes do Student Registration Form
 ├── fixtures/
-│   ├── data.json               # Test data (Happy/Unhappy paths)
-│   └── media/                  # Files for upload testing
+│   ├── media/                        # Arquivos para upload (testpdf.pdf, testpng.png)
+│   └── data.json                     # Massa de dados e URLs
+├── MAPPED-ISSUES/                    # [NOVO] Logs de bugs encontrados manual/exploratório
+│   └── STUDENT_REGISTRATION_FORM.md
 ├── pages/
-│   ├── CommonsPage.js          # Shared methods
-│   └── FormsPage.js            # Page Object for Registration Form
-├── support/
-│   ├── e2e.js                  # Global configurations & plugins
-│   └── commands.js             # Custom commands
-└── reports/                    # HTML Reports (generated after run)
+│   ├── CommonsPage.js                # Métodos compartilhados (Navegação, Inputs genéricos)
+│   ├── ElementsPage.js               # [NOVO] Page Object específico para a aba Elements
+│   └── FormsPage.js                  # Page Object para a aba Forms
+├── reports/
+│   └── html/                         # Relatórios HTML gerados (mochawesome)
+│       └── index.html
+└── support/
+    ├── commands.js                   # Comandos customizados
+    ├── e2e.js                        # Configurações globais e plugins
+.gitignore                            # Arquivos ignorados pelo Git
+cypress.config.js                     # Configuração do Cypress
+package.json                          # Dependências e scripts npm
+README.md                             # Documentação do projeto
