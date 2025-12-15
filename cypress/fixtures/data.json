@@ -1,28 +1,55 @@
 {
     "endpoints": {
-        "practiceFormsUrl": "/automation-practice-form",
-        "textBoxUrl": "/text-box",
-        "checkBoxUrl": "/checkbox",
-        "radioBtnUrl": "/radio-button",
-        "webTables": "/webtables",
-        "btnUrl": "/buttons",
-        "linksUrl": "/links",
-        "brokenLinksUrl": "/broken",
-        "uploadDownloadUrl": "/upload-download",
-        "alertsUrl": "/alerts",
-        "browserWindowsUrl": "/browser-windows",
-        "samplePageUrl": "/sample",
-        "framesUrl": "/frames",
-        "nestedFramesUrl": "/nestedframes",
-        "modalDialogsUrl": "/modal-dialogs",
-        "accordianUrl": "/accordian",
-        "autoCompleteUrl": "/auto-complete",
-        "progressBarUrl": "/progress-bar",
-        "dynamicPropertiesUrl": "/dynamic-properties",
-        "tabsUrl": "/tabs",
-        "toolTipsUrl": "/tool-tips",
-        "sliderUrl": "/slider",
-        "datePickerUrl": "/date-picker"
+    "practiceFormsUrl": "/automation-practice-form",
+    "textBoxUrl": "/text-box",
+    "checkBoxUrl": "/checkbox",
+    "radioBtnUrl": "/radio-button",
+    "webTables": "/webtables",
+    "btnUrl": "/buttons",
+    "linksUrl": "/links",
+    "brokenLinksUrl": "/broken",
+    "uploadDownloadUrl": "/upload-download",
+    "alertsUrl": "/alerts",
+    "browserWindowsUrl": "/browser-windows",
+    "samplePageUrl": "/sample",
+    "framesUrl": "/frames",
+    "nestedFramesUrl": "/nestedframes",
+    "modalDialogsUrl": "/modal-dialogs",
+    "accordianUrl": "/accordian",
+    "autoCompleteUrl": "/auto-complete",
+    "progressBarUrl": "/progress-bar",
+    "dynamicPropertiesUrl": "/dynamic-properties",
+    "tabsUrl": "/tabs",
+    "toolTipsUrl": "/tool-tips",
+    "sliderUrl": "/slider",
+    "datePickerUrl": "/date-picker",
+    "sortableUrl": "/sortable",
+    "selectableUrl": "/selectable",
+    "resizableUrl": "/resizable",
+    "droppableUrl": "/droppable",
+    "dragabbleUrl": "/dragabble",
+    "bookStoreEndpoints": {
+      "loginUrl": "/login",
+      "booksUrl": "/books"
+    },
+    "api": {
+      "user": "/Account/v1/User",
+      "token": "/Account/v1/GenerateToken",
+      "books": "/BookStore/v1/Books"
+    }
+  },
+    "interactionsData": {
+        "droppedText": "Dropped!",
+        "activeColor": "rgb(0, 123, 255)",
+        "droppedColor": "rgb(70, 130, 180)",
+        "sortableItemTwo": "Two",
+        "selectableItemOne": "Cras justo odio",
+        "selectableItemTwo": "Dapibus ac facilisis in",
+        "selectableItemThree": "Morbi leo risus",
+        "initialBoxWidth": 200,
+        "boxTolerance": 5,
+        "resizeX": 500,
+        "resizeY": 500
     },
     "userData": {
         "name": {
@@ -194,6 +221,13 @@
         "sliderValue": 90,
         "dateToType": "10/15/2025",
         "dateTimeToType": "October 15, 2025 10:30 AM"
+    },
+    "bookStoreData": {
+        "validUser": "ArturTestQA",
+        "validPassword": "Password123!",
+        "bookTitle": "Git Pocket Guide",
+        "authorName": "Richard E. Silverman",
+        "loginSuccessText": "ArturTestQA"
     },
     "alertsData": {
         "simpleAlert": "You clicked a button",

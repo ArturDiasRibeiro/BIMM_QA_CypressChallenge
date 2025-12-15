@@ -59,13 +59,15 @@ class WidgetsPage {
     }
 
     validateSlider() {
-        cy.get('.range-slider')
-            .invoke('val', data.widgetsData.sliderValue)
-            .trigger('input', { force: true })
-            .trigger('change', { force: true });
+        const valueToSet = data.widgetsData.sliderValue;
 
-        cy.get('#sliderValue')
-            .should('have.value', data.widgetsData.sliderValue);
+        cy.get('.range-slider').then(($input) => {
+            const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+            nativeInputValueSetter.call($input[0], valueToSet);
+            $input[0].dispatchEvent(new Event('input', { bubbles: true }));
+        });
+
+        cy.get('#sliderValue').should('have.value', valueToSet);
     }
 
     validateDatePicker() {

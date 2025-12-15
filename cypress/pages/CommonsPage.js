@@ -6,18 +6,20 @@ class CommonsPage {
         cy.visit(url, { failOnStatusCode: false });
     }
 
-    insertName() {
-        const fullName = data.userData.name.firstName + " " + data.userData.name.lastName;
+    insertName(nameOverride) {
+        // Se nameOverride foi passado, usa ele. Se não, usa o Artur Dias do JSON.
+        const textToType = nameOverride || (data.userData.name.firstName + " " + data.userData.name.lastName);
+
         cy.get('body').then(($body) => {
             if ($body.find('#firstName').length > 0) {
                 cy.log('Filling first name field');
                 cy.get('#firstName').clear().should('be.visible').type(data.userData.name.firstName);
                 if ($body.find('#lastName').length > 0) {
-                    cy.log('Filling last name field');
                     cy.get('#lastName').clear().should('be.visible').type(data.userData.name.lastName);
                 }
             } else if ($body.find('#userName').length > 0) {
-                cy.get('#userName').clear().type(fullName);
+                // CORREÇÃO: Usamos a variável textToType aqui
+                cy.get('#userName').clear().type(textToType);
             } else {
                 throw new Error('Name input field not found');
             }
@@ -48,4 +50,5 @@ class CommonsPage {
         cy.get('#uploadPicture').selectFile(data.uploadDownloadData.uploadFilePath);
     }
 }
+
 export default new CommonsPage();

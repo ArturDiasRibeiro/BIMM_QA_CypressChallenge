@@ -1,4 +1,4 @@
-import data from "../fixtures/data.json"
+import data from "../fixtures/data.json";
 import formsPage from '../pages/FormsPage';
 import commonsPage from '../pages/CommonsPage';
 
@@ -7,43 +7,51 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 });
 
 describe('DemoQA - Form Submission', () => {
-beforeEach(() => {
+
+    beforeEach(() => {
         commonsPage.accessUrl(data.endpoints.practiceFormsUrl);
     });
 
-    it("HappyPath - Identify and fulfill all fields ", () => {
-        commonsPage.insertName();
-        commonsPage.inputEmail();
-        formsPage.selectGender();
-        formsPage.fillMobileNumber();
-        formsPage.fillBirthDate();
-        formsPage.fillSubjects();
-        formsPage.selectHobbies();
-        commonsPage.uploadPic();
-        commonsPage.addressInput();
-        formsPage.selectState();
-        formsPage.selectCity();
-        commonsPage.pressBtnSubmit();
-        formsPage.validateSuccessMessage();
+    context('Successful Submission Scenarios', () => {
+        it("Should identify and fulfill all fields successfully", () => {
+            commonsPage.insertName();
+            commonsPage.inputEmail();
+            formsPage.selectGender();
+            formsPage.fillMobileNumber();
+            formsPage.fillBirthDate();
+            formsPage.fillSubjects();
+            formsPage.selectHobbies();
+            
+            commonsPage.uploadPic(); 
+            
+            commonsPage.addressInput();
+            formsPage.selectState();
+            formsPage.selectCity();
+            commonsPage.pressBtnSubmit();
+            formsPage.validateSuccessMessage();
+        });
     });
 
-    it("Empty submission attempt", () => {
-        commonsPage.accessUrl(data.endpoints.practiceFormsUrl);
-        commonsPage.pressBtnSubmit();
-        formsPage.checkForEmptyFieldError()
+    context('Validation & Error Handling', () => {
+        it("Should show error borders on empty submission attempt", () => {
+            commonsPage.pressBtnSubmit();
+            formsPage.checkForEmptyFieldError();
+        });
+
+        it('Should refuse submission with invalid email format', () => {
+            commonsPage.insertName();
+            formsPage.selectGender();
+            formsPage.fillMobileNumber();
+            commonsPage.inputInvalidEmail();
+            commonsPage.pressBtnSubmit();
+            formsPage.wrongEmailError();
+        });
     });
 
-    it('Refuse a invalid email', () => {
-        commonsPage.insertName();
-        formsPage.selectGender();
-        formsPage.fillMobileNumber();
-        commonsPage.inputInvalidEmail();
-        commonsPage.pressBtnSubmit();
-        formsPage.wrongEmailError();
-    });
-
-    it("City field dependency on State field ", () => {
-        formsPage.selectState();
-        formsPage.checksForCorrectCity();
+    context('Field Dependency Scenarios', () => {
+        it("Should enable City dropdown only after State selection", () => {
+            formsPage.selectState();
+            formsPage.checksForCorrectCity();
+        });
     });
 });
