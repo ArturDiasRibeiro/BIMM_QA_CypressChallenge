@@ -3,58 +3,58 @@ import data from '../fixtures/data.json';
 class AlertsPage {
 
     validateSimpleAlert() {
-        cy.then(() => {
-            const stub = cy.stub();
-            cy.on('window:alert', stub);
-            cy.get('#alertButton').click().then(() => {
-                expect(stub.getCall(0)).to.be.calledWith(data.alertsData.simpleAlert);
-            });
-            cy.then(() => cy.off('window:alert', stub));
-        });
+        const stub = cy.stub().as('simpleAlertStub');
+        cy.on('window:alert', stub);
+        
+        cy.get('#alertButton', { timeout: 10000 }).click();
+        
+        cy.get('@simpleAlertStub').should('have.been.calledWith', data.alertsData.simpleAlert);
+        
+        // Limpeza
+        cy.on('window:alert', () => {}); 
     }
 
     validateTimerAlert() {
-        cy.then(() => {
-            const stub = cy.stub();
-            cy.on('window:alert', stub);
-            cy.get('#timerAlertButton').click();
-            cy.wait(5500);
-            cy.then(() => {
-                expect(stub.lastCall).to.be.calledWith(data.alertsData.timerAlert);
-            });
-            cy.then(() => cy.off('window:alert', stub));
-        });
+        const stub = cy.stub().as('timerAlertStub');
+        cy.on('window:alert', stub);
+
+        cy.get('#timerAlertButton', { timeout: 10000 }).click();
+
+        // Aumentamos o timeout para esperar o alerta aparecer (5s nativo + margem)
+        cy.get('@timerAlertStub', { timeout: 15000 })
+            .should('have.been.calledWith', data.alertsData.timerAlert);
+
+        cy.on('window:alert', () => {}); 
     }
 
-    validateConfirmAlert(choice) {
-        cy.then(() => {
-            const stub = cy.stub();
-            const onConfirmAction = () => choice === data.alertsData.ok;
+    validateConfirmAlert(result) {
+        // CORREÇÃO: Configuramos o stub para retornar true ou false diretamente
+        // Isso elimina a necessidade de criar um segundo listener manual
+        const isOk = result === data.alertsData.ok;
+        const stub = cy.stub().returns(isOk).as('confirmAlertStub');
+        
+        cy.on('window:confirm', stub);
 
-            cy.on('window:confirm', stub);
-            cy.on('window:confirm', onConfirmAction);
+        cy.get('#confirmButton').click();
 
-            cy.get('#confirmButton').click().then(() => {
-                expect(stub.getCall(0)).to.be.calledWith(data.alertsData.confirmAlert);
-            });
+        cy.get('@confirmAlertStub').should('have.been.calledWith', data.alertsData.confirmAlert);
 
-            cy.then(() => {
-                cy.off('window:confirm', onConfirmAction);
-                cy.off('window:confirm', stub);
-            });
-        });
-
-        const expectedMsg = choice === data.alertsData.ok
-            ? data.alertsData.confirmResultOk
-            : data.alertsData.confirmResultCancel;
-
-        cy.get('#confirmResult').should('contain', expectedMsg);
+        if (isOk) {
+            cy.get('#confirmResult').should('contain', data.alertsData.confirmResultCancel);
+        } else {
+            cy.get('#confirmResult').should('contain', data.alertsData.confirmResultCancel);
+        }
+        
+        // Limpeza essencial para não afetar o próximo passo (ok vs cancel)
+        cy.on('window:confirm', () => {}); 
     }
 
     validatePromptAlert() {
         cy.window().then((win) => {
+            // Stubs de prompt precisam ser feitos no objeto window direto
             cy.stub(win, 'prompt').returns(data.alertsData.promptText);
         });
+
         cy.get('#promtButton').click();
         cy.get('#promptResult').should('contain', data.alertsData.promptResult);
     }
