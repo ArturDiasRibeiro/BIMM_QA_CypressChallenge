@@ -226,5 +226,18 @@ class ElementsPage {
     validateUpload() {
         cy.get('#uploadedFilePath').should('contain', data.uploadDownloadData.uploadFileName);
     }
+
+    dynamicPropertiesValidation() {
+        const time = data.dynamicPropertiesData.timeout;
+        const redColor = data.dynamicPropertiesData.dangerColor;
+
+        cy.get('#enableAfter').should('be.disabled');
+        cy.get('#enableAfter', { timeout: time }).should('be.enabled');
+
+        cy.get('#colorChange', { timeout: time })
+            .should('have.class', 'text-danger')
+            .and('have.css', 'color', redColor);
+        cy.get('#visibleAfter', { timeout: time }).should('be.visible');
+    }
 }
 export default new ElementsPage();

@@ -8,7 +8,21 @@
         "btnUrl": "/buttons",
         "linksUrl": "/links",
         "brokenLinksUrl": "/broken",
-        "uploadDownloadUrl": "/upload-download"
+        "uploadDownloadUrl": "/upload-download",
+        "alertsUrl": "/alerts",
+        "browserWindowsUrl": "/browser-windows",
+        "samplePageUrl": "/sample",
+        "framesUrl": "/frames",
+        "nestedFramesUrl": "/nestedframes",
+        "modalDialogsUrl": "/modal-dialogs",
+        "accordianUrl": "/accordian",
+        "autoCompleteUrl": "/auto-complete",
+        "progressBarUrl": "/progress-bar",
+        "dynamicPropertiesUrl": "/dynamic-properties",
+        "tabsUrl": "/tabs",
+        "toolTipsUrl": "/tool-tips",
+        "sliderUrl": "/slider",
+        "datePickerUrl": "/date-picker"
     },
     "userData": {
         "name": {
@@ -151,5 +165,46 @@
         "downloadFileName": "sampleFile.jpeg",
         "uploadFilePath": "cypress/fixtures/media/testpng.png",
         "uploadFileName": "testpng.png"
+    },
+    "dynamicPropertiesData": {
+        "timeout": 6000,
+        "dangerColor": "rgb(220, 53, 69)"
+    },
+    "browserWindowsData": {
+        "sampleHeading": "This is a sample page"
+    },
+    "framesData": {
+        "sampleHeading": "This is a sample page",
+        "parentFrameText": "Parent frame",
+        "childFrameText": "Child Iframe",
+        "smallModalText": "This is a small modal",
+        "largeModalText": "Lorem Ipsum"
+    },
+    "widgetsData": {
+        "accordianContent": "Lorem Ipsum is simply dummy text",
+        "colors": [
+            "Green",
+            "Blue"
+        ],
+        "singleColor": "Red",
+        "progressBarFull": "100%",
+        "successColor": "rgb(40, 167, 69)",
+        "tabsContentOrigin": "Contrary to popular belief, Lorem Ipsum is not simply random text",
+        "tabsContentUse": "It is a long established fact that a reader will be distracted",
+        "sliderValue": 90,
+        "dateToType": "10/15/2025",
+        "dateTimeToType": "October 15, 2025 10:30 AM"
+    },
+    "alertsData": {
+        "simpleAlert": "You clicked a button",
+        "timerAlert": "This alert appeared after 5 seconds",
+        "confirmAlert": "Do you confirm action?",
+        "confirmResultOk": "You selected Ok",
+        "confirmResultCancel": "You selected Cancel",
+        "promptLabel": "Please enter your name",
+        "promptText": "Artur Dias",
+        "promptResult": "You entered Artur Dias",
+        "ok": "ok",
+        "cancel": "cancel"
     }
 }
