@@ -4,12 +4,9 @@ import browserWindowsPage from '../pages/BrowserWindowsPage';
 import framesPage from '../pages/FramesPage';
 import data from '../fixtures/data.json';
 
-// --- ESSENCIAL: Ignora erros do site para não travar o cy.visit ---
 Cypress.on('uncaught:exception', (err, runnable) => {
-    // Retornar false impede que o Cypress falhe o teste
     return false;
 });
-// -----------------------------------------------------------------
 
 describe('DemoQA - Alerts, Frame & Windows', () => {
 

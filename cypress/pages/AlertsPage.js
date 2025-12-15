@@ -10,7 +10,6 @@ class AlertsPage {
         
         cy.get('@simpleAlertStub').should('have.been.calledWith', data.alertsData.simpleAlert);
         
-        // Limpeza
         cy.on('window:alert', () => {}); 
     }
 
@@ -20,7 +19,6 @@ class AlertsPage {
 
         cy.get('#timerAlertButton', { timeout: 10000 }).click();
 
-        // Aumentamos o timeout para esperar o alerta aparecer (5s nativo + margem)
         cy.get('@timerAlertStub', { timeout: 15000 })
             .should('have.been.calledWith', data.alertsData.timerAlert);
 
@@ -28,8 +26,6 @@ class AlertsPage {
     }
 
     validateConfirmAlert(result) {
-        // CORREÇÃO: Configuramos o stub para retornar true ou false diretamente
-        // Isso elimina a necessidade de criar um segundo listener manual
         const isOk = result === data.alertsData.ok;
         const stub = cy.stub().returns(isOk).as('confirmAlertStub');
         
@@ -45,13 +41,11 @@ class AlertsPage {
             cy.get('#confirmResult').should('contain', data.alertsData.confirmResultCancel);
         }
         
-        // Limpeza essencial para não afetar o próximo passo (ok vs cancel)
         cy.on('window:confirm', () => {}); 
     }
 
     validatePromptAlert() {
         cy.window().then((win) => {
-            // Stubs de prompt precisam ser feitos no objeto window direto
             cy.stub(win, 'prompt').returns(data.alertsData.promptText);
         });
 

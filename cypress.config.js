@@ -13,6 +13,8 @@ module.exports = defineConfig({
   },
 
   e2e: {
+    chromeWebSecurity: false,
+    pageLoadTimeout: 60000,
     baseUrl: 'https://demoqa.com',
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);
